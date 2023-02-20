@@ -9,8 +9,18 @@ router.get("/", (req, res) => {
         console.log(postData);
         const hbsPosts = postData.map((post) => post.toJSON());
         console.log("==============================");
+
+        for (let i = 0; i < hbsPosts.length; i++) {
+            let date = new Date(hbsPosts[i].createdAt);
+            var day = date.getDate();
+            var month = date.getMonth() + 1;
+            var year = date.getFullYear();
+            hbsPosts[i].createdAt = `${month}/${day}/${year}`;
+        }
+
         console.log(hbsPosts);
-        res.render("home", {
+
+        res.render("homepage", {
             allPosts: hbsPosts,
         });
     });

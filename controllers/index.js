@@ -5,7 +5,7 @@ const frontRoutes = require("./frontRoutes");
 
 router.get("/sessionData", (req, res) => res.json(req.session));
 
-// router.use("/", frontRoutes);
+router.use("/", frontRoutes);
 router.use("/api", apiRoutes);
 
 module.exports = router;

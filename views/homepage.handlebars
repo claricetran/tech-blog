@@ -1,0 +1,9 @@
+{{#each allPosts}}
+    <section>
+        <div>
+            <a href="/post/{{id}}"><h2>{{title}}</h2></a>
+            <h3>Created by {{User.name}} on {{createdAt}}</h3>
+        </div>
+        <p>{{content}}</p>
+    </section>
+{{/each}}
