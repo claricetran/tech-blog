@@ -3,15 +3,21 @@ const Post = require("./Post");
 const Comment = require("./Comment");
 
 // User - Post Association
+Post.belongsTo(User, {
+    onDelete: "CASCADE",
+});
 User.hasMany(Post);
-Post.belongsTo(User);
 
 // User - Comment Association
+Comment.belongsTo(User, {
+    onDelete: "CASCADE",
+});
 User.hasMany(Comment);
-Comment.belongsTo(User);
 
 // Post - Comment Association
+Comment.belongsTo(Post, {
+    onDelete: "CASCADE",
+});
 Post.hasMany(Comment);
-Comment.belongsTo(Post);
 
 module.exports = { User, Post, Comment };
