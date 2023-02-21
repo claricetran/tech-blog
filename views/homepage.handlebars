@@ -1,9 +1,9 @@
 {{#each allPosts}}
     <section>
-        <div>
+        <div class="post-header">
             <a href="/post/{{id}}"><h2>{{title}}</h2></a>
-            <h3>Created by {{User.name}} on {{createdAt}}</h3>
+            <h4>Created by {{User.name}} on {{createdAt}}</h4>
         </div>
-        <p>{{content}}</p>
+        <p class="post">{{content}}</p>
     </section>
 {{/each}}

@@ -22,21 +22,24 @@ router.get("/", (req, res) => {
 
         res.render("homepage", {
             allPosts: hbsPosts,
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId,
         });
     });
 });
+
+//login page
 router.get("/login", (req, res) => {
     if (req.session.loggedIn) {
         return res.redirect("/");
     }
-    res.render("login");
+    res.render("login", {
+        loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
+    });
 });
-router.get("/signup", (req, res) => {
-    if (req.session.loggedIn) {
-        return res.redirect("/");
-    }
-    res.render("signup");
-});
+
+//dashboard page
 router.get("/dashboard", (req, res) => {
     if (!req.session.userId) {
         return res.redirect("/login");
@@ -48,8 +51,34 @@ router.get("/dashboard", (req, res) => {
         const hbsData = userdata.toJSON();
         console.log("==============================");
         console.log(hbsData);
-        res.render("profile", hbsData);
+        res.render("dashboard", {
+            userPosts: hbsData,
+            loggedIn: req.session.loggedIn,
+            userId: req.session.userId,
+        });
     });
+});
+
+router.get("/post/:id", (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+    Post.findByPk(req.params.id, {
+        include: [User, Comment],
+    }).then((postData) => {
+        console.log(postData);
+    });
+});
+
+//redirect to homepage on logout
+router.get("/logout", (req, res) => {
+    if (req.session.loggedIn) {
+        req.session.destroy(() => {
+            res.status(204).end();
+        });
+    } else {
+        res.status(404).end();
+    }
 });
 
 module.exports = router;
