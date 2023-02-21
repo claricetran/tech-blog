@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
         const newPost = {
             title: req.body.title,
             content: req.body.content,
-            user_id: req.body.user_id, //Change to session.UserId
+            user_id: req.session.userId, //Change to session.UserId
         };
         const Post = await Post.create(newPost);
         res.json({ status: "success", Post });

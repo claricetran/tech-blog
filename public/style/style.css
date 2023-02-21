@@ -30,6 +30,11 @@ body {
     background-color: var(--isabelline);
 }
 
+.break {
+    flex-basis: 100%;
+    height: 0;
+}
+
 a {
     text-decoration: none;
     color: var(--ultra-violet);
@@ -47,7 +52,6 @@ header {
     width: 100%;
     position: fixed;
     top: 0;
-    width: 100%;
 }
 
 header + main {
@@ -103,6 +107,13 @@ form {
     width: 20%;
 }
 
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 12px 20px;
+    resize: none;
+}
+
 form h2 {
     text-align: center;
 }
@@ -148,13 +159,17 @@ button:hover {
     background-color: var(--pale-dogwood);
 }
 
-section {
+.post,
+#comments {
     width: 60%;
     height: fit-content;
     margin: 10px auto;
+    border-radius: 6px;
+    box-shadow: 2px 2px 6px black;
 }
 
-.post-header {
+.post-header,
+#comments-header {
     display: flex;
     flex-wrap: row wrap;
     justify-content: space-between;
@@ -165,11 +180,15 @@ section {
     background-image: linear-gradient(to top, var(--pale-dogwood), var(--red-pale-dogwood));
 }
 
-.post {
+.comment {
+    border-bottom: 1px dotted var(--space-cadet);
+}
+
+.post-content,
+#comments-content {
     border: 1px solid var(--space-cadet);
     border-radius: 0px 0px 6px 6px;
 }
-
 section p {
     text-align: justify;
     padding: 10px;
@@ -178,6 +197,14 @@ section p {
 
 h3 {
     text-align: center;
+}
+
+#comment-form {
+    margin: 0;
+}
+
+#comments {
+    width: 33%;
 }
 
 footer {
@@ -189,6 +216,12 @@ footer {
 
 .hide {
     display: none;
+}
+
+@media screen and (max-width: 953px) {
+    #comments {
+        margin: 0;
+    }
 }
 
 @media screen and (max-width: 650px) {
@@ -204,5 +237,9 @@ footer {
     }
     section {
         min-width: fit-content;
+    }
+    #comment-form {
+        width: 33%;
+        min-width: 300px;
     }
 }

@@ -1,0 +1,28 @@
+<section class="post">
+    <div class="post-header">
+        <a href="/post/{{post.id}}"><h2>{{post.title}}</h2></a>
+        <h4>Posted by {{post.User.name}} on {{post.createdAt}}</h4>
+    </div>
+    <p class="post-content">{{post.content}}</p>
+</section>
+<div class="break"></div>
+<form id="comment-form" data-post-id={{post.id}}>
+    <textarea id="commentInput" name="comment" placeholder="Leave a comment."></textarea>
+    <button type="submit">Submit</button>
+</form>
+<div class="break"></div>
+{{#if comments}}
+    <section id="comments">
+        <h2 id="comments-header">Comments</h2>
+        <div id="comments-content">
+            {{#each comments}}
+                <div class="comment">
+                    <p>{{content}}</p>
+                    <p>- {{User.name}}, {{createdAt}}</p>
+                </div>
+            {{/each}}
+        </div>
+    </section>
+{{/if}}
+
+<script src="../js/post.js"></script>
