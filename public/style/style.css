@@ -190,9 +190,13 @@ button:hover {
     background-color: var(--pale-dogwood);
 }
 
+#update {
+    width: 100%;
+}
+
 .post,
 #comments {
-    width: 60%;
+    width: 70%;
     height: fit-content;
     margin: 10px auto;
     border-radius: 6px;

@@ -59,12 +59,12 @@ router.put("/:id", async (req, res) => {
             title: req.body.title,
             content: req.body.content,
         };
-        let Post = await Post.update(updatePost, {
+        let post = await Post.update(updatePost, {
             where: {
                 id: req.params.id,
             },
         });
-        res.json({ status: "success", Post });
+        res.json({ status: "success", post });
     } catch (error) {
         console.log(error);
         res.status(500).json({

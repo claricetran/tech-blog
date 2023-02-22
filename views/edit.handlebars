@@ -1,0 +1,11 @@
+<form id="update" data-post-id={{post.id}}>
+    <div class="post-header">
+        <input type="text" name="title" id="title" value="{{post.title}}" />
+    </div>
+    <textarea id="content" name="content">{{post.content}}</textarea>
+
+    <button id="save" type="submit">Save</button>
+    <button id="delete" type="button">Delete</button>
+</form>
+
+<script src="../js/edit.js"></script>

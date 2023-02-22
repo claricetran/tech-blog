@@ -128,6 +128,28 @@ router.get("/post/:id", async (req, res) => {
     });
 });
 
+//page to edit/delete post
+router.get("/edit/:id", async (req, res) => {
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+    const post = await Post.findByPk(req.params.id, {
+        include: [
+            {
+                model: User,
+                attributes: ["name"],
+            },
+        ],
+    });
+    const hbsPost = post.toJSON();
+    console.log(hbsPost);
+    res.render("edit", {
+        post: hbsPost,
+        loggedIn: req.session.loggedIn,
+        userId: req.session.userId,
+    });
+});
+
 //redirect to homepage on logout
 router.get("/logout", (req, res) => {
     if (req.session.loggedIn) {
