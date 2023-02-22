@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const { Post } = require("../../models/");
+const { Post, User } = require("../../models/");
 
 // Get all Posts
 router.get("/", (req, res) => {
@@ -38,10 +38,11 @@ router.post("/", async (req, res) => {
         const newPost = {
             title: req.body.title,
             content: req.body.content,
-            user_id: req.session.userId, //Change to session.UserId
         };
-        const Post = await Post.create(newPost);
-        res.json({ status: "success", Post });
+        const post = await Post.create(newPost);
+        const user = await User.findByPk(req.session.userId);
+        user.addPost(post);
+        res.json({ status: "success", post });
     } catch (error) {
         console.log(error);
         res.status(500).json({

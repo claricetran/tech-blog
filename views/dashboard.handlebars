@@ -1,0 +1,23 @@
+<div id="dashboard-header">
+    <h2>My Posts</h2>
+    <div id="add-post">+</div>
+</div>
+<div class="break"></div>
+<form id="post-form" class="hide">
+    <input type="text" name="title" id="title" placeholder="Title" />
+    <textarea id="content" name="content" placeholder="Type content here."></textarea>
+    <button type="submit">Submit</button>
+</form>
+<section id="posts">
+    {{#each userPosts}}
+        <div class="post">
+            <div class="post-header">
+                <a href="/post/{{id}}"><h2>{{title}}</h2></a>
+                <h4>Posted by {{User.name}} on {{createdAt}}</h4>
+            </div>
+            <p class="post-content">{{content}}</p>
+        </div>
+    {{/each}}
+</section>
+
+<script src="./js/dashboard.js"></script>

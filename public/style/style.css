@@ -79,6 +79,37 @@ h3 {
     color: var(--dark-ultra-violet);
 }
 
+h4 {
+    text-align: right;
+}
+
+#add-post {
+    height: 40px;
+    width: 40px;
+    background-color: var(--dark-ultra-violet);
+    color: var(--rose-quartz);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    cursor: pointer;
+    transition: transform 0.2s ease-out;
+    border: 3px solid var(--rose-quartz);
+}
+
+#dashboard-header {
+    display: flex;
+    height: fit-content;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+}
+
+#posts {
+    height: 95%;
+}
+
 nav a {
     font-size: large;
     padding: 0 10px;

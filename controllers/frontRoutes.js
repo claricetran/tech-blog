@@ -6,9 +6,7 @@ router.get("/", (req, res) => {
     Post.findAll({
         include: [User],
     }).then((postData) => {
-        console.log(postData);
         const hbsPosts = postData.map((post) => post.toJSON());
-        console.log("==============================");
 
         for (let i = 0; i < hbsPosts.length; i++) {
             let date = new Date(hbsPosts[i].createdAt);
@@ -44,15 +42,28 @@ router.get("/dashboard", (req, res) => {
     if (!req.session.userId) {
         return res.redirect("/login");
     }
-    User.findByPk(req.session.userId, {
-        include: [Post],
-    }).then((userdata) => {
-        console.log(userdata);
-        const hbsData = userdata.toJSON();
-        console.log("==============================");
-        console.log(hbsData);
+    Post.findAll({
+        where: {
+            user_id: req.session.userId,
+        },
+        include: [
+            {
+                model: User,
+                attributee: ["name"],
+            },
+        ],
+    }).then((posts) => {
+        const hbsPosts = posts.map((post) => post.toJSON());
+        for (let i = 0; i < hbsPosts.length; i++) {
+            let date = new Date(hbsPosts[i].createdAt);
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            hbsPosts[i].createdAt = `${month}/${day}/${year}`;
+        }
+
         res.render("dashboard", {
-            userPosts: hbsData,
+            userPosts: hbsPosts,
             loggedIn: req.session.loggedIn,
             userId: req.session.userId,
         });
