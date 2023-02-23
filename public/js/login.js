@@ -20,30 +20,35 @@ loginLink.addEventListener("click", () => {
     loginForm.reset();
 });
 
-loginForm.addEventListener("submit", (e) => {
+loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
-    const loginObj = {
-        username: document.getElementById("login-un").value,
-        password: document.getElementById("login-pw").value,
-    };
-    console.log(loginObj);
-    fetch("/api/users/login", {
-        method: "POST",
-        body: JSON.stringify(loginObj),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    }).then((res) => {
-        if (res.ok) {
+
+    try {
+        const loginObj = {
+            username: document.getElementById("login-un").value,
+            password: document.getElementById("login-pw").value,
+        };
+        console.log(loginObj);
+        const createRes = await fetch("/api/users/login", {
+            method: "POST",
+            body: JSON.stringify(loginObj),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (createRes.status == 200) {
             console.log("logged in.");
             location.href = "/";
-        } else {
+        } else if (createRes.status == 400) {
             loginWarn.textContent = "Invalid login or password.";
             setTimeout(() => {
                 loginWarn.textContent = "";
             }, 5000);
         }
-    });
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 signupForm.addEventListener("submit", (e) => {
@@ -59,14 +64,14 @@ signupForm.addEventListener("submit", (e) => {
         headers: {
             "Content-Type": "application/json",
         },
-    }).then((res) => {
-        if (res.ok) {
-            location.href = "/";
-        } else {
-            signupWarn.textContent = "That username is already in use.";
-            setTimeout(() => {
-                signupWarn.textContent = "";
-            }, 3000);
-        }
-    });
+    })
+        .then((res) => {
+            console.log(res.status);
+            if (res.status == 200) {
+                location.href = "/";
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
 });

@@ -44,7 +44,7 @@ router.post("/", async (req, res) => {
 
         if (existing) {
             return res.status(409).json({
-                message: "Email already exists",
+                message: "Username already exists",
             });
         }
 
@@ -62,7 +62,6 @@ router.post("/", async (req, res) => {
             console.log("req.session.save ~ req.session.cookie", req.session.cookie);
             return res.status(200).json(newUser);
         });
-        res.json({ status: "success", user });
     } catch (error) {
         console.log(error);
         return res.status(500).json({

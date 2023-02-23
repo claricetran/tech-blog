@@ -196,7 +196,7 @@ button:hover {
 
 .post,
 #comments {
-    width: 70%;
+    width: 100%;
     height: fit-content;
     margin: 10px auto;
     border-radius: 6px;
